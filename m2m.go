@@ -24,9 +24,21 @@ func check(e error) {
 
 func main() {
 
-  // Read first argument,
+  // Title of the post to import to Medium
+  t := os.Args[1]
   // The file's path (Absolute)
-  f := os.Args[1]
+  f := os.Args[2]
+  // Content format.
+  // Can be either:
+  //  - markdown
+  //  - html
+  // cf := os.Args[3]
+  // Publish status
+  // Can be either:
+  //  - public
+  //  - draft
+  //  - unlisted
+  // ps := os.Args[4]
 
   // Create a new client with the token aquired from
   // https://medium.com/me/settings
@@ -36,9 +48,10 @@ func main() {
 
   // Set necesary parameters necesary to create a post
   // and create the post as a draft
+  //TODO: parse arguments passed through parameters to this post options
   p, err := m.CreatePost(medium.CreatePostOptions{
     UserID: u.ID,
-    Title: "Post title",
+    Title: t,
     Content: string(MDFile(f)),
     ContentFormat: "markdown",
     PublishStatus: "draft",
